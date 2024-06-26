@@ -1,0 +1,12 @@
+JWT_SECRET=djgjkdshbgjkhfnjksdfhbnsjkdfsdhjfk
+
+ADMIN_SECRET_KEY= sample admin kjey
+
+NODE_ENV = DEVELOPMENT
+
+CLIENT_URL = frontend url
+
+
+CLOUDINARY_CLOUD_NAME= 	dph9a96me
+CLOUDINARY_API_KEY = 291522354367978
+CLOUDINARY_API_SECRET =  MSXI4Jaiw-pySVo9prjZwGy8lW8
