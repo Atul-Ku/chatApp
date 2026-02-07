@@ -27,13 +27,11 @@ app.post("/login", loginValidator(), validateHandler, login);
 
 // After here user must be logged in to access the routes
 
-app.use(isAuthenticated);
+app.get("/me", isAuthenticated, getMyProfile);
 
-app.get("/me", getMyProfile);
+app.get("/logout", isAuthenticated, logout);
 
-app.get("/logout", logout);
-
-app.get("/search", searchUser);
+app.get("/search", isAuthenticated, searchUser);
 
 app.put(
   "/sendrequest",
@@ -49,8 +47,8 @@ app.put(
   acceptFriendRequest
 );
 
-app.get("/notifications", getMyNotifications);
+app.get("/notifications", isAuthenticated, getMyNotifications);
 
-app.get("/friends", getMyFriends);
+app.get("/friends", isAuthenticated,  getMyFriends);
 
 export default app;

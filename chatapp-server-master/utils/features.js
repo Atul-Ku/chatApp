@@ -4,7 +4,7 @@ import { v2 as cloudinary } from "cloudinary";
 import { getBase64, getSockets } from "../lib/helper.js";
 
 const cookieOptions = {
-  maxAge: 15 * 24 * 60 * 60 * 1000,
+  maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
   sameSite: "none",
   httpOnly: true,
   secure: true,
@@ -56,8 +56,13 @@ const uploadFilesToCloudinary = async (files = []) => {
   }
 };
 
-const deletFilesFromCloudinary = async (public_ids) => {
+const deletFilesFromCloudinary = async (public_ids = []) => {
+  const deletePromises = public_ids.map(id =>
+    cloudinary.uploader.destroy(id)
+  );
+  await Promise.all(deletePromises);
 };
+
 
 export {
   sendToken,

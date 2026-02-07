@@ -19,13 +19,11 @@ app.get("/logout", adminLogout);
 
 // Only Admin Can Accecss these Routes
 
-app.use(adminOnly);
+app.get("/", adminOnly, getAdminData);
 
-app.get("/", getAdminData);
-
-app.get("/users", allUsers);
-app.get("/chats", allChats);
-app.get("/messages", allMessages);
+app.get("/users", adminOnly, allUsers);
+app.get("/chats", adminOnly, allChats);
+app.get("/messages", adminOnly, allMessages);
 
 app.get("/stats", getDashboardStats);
 
