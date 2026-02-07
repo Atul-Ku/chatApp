@@ -1,6 +1,6 @@
 import express from "express";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
+import morgan from "morgan";
 import { errorMiddleware } from "./middlewares/error.js";
 import cookieParser from "cookie-parser";
 import { Server } from "socket.io";
@@ -17,6 +17,7 @@ import {
   START_TYPING,
   STOP_TYPING,
 } from "./constants/events.js";
+import connectDB from "./config/db.js";
 import { getSockets } from "./lib/helper.js";
 import { Message } from "./models/message.js";
 import { corsOptions } from "./constants/config.js";
@@ -36,11 +37,7 @@ const adminSecretKey = process.env.ADMIN_SECRET_KEY || "adsasdsdfsdfsdfd";
 const userSocketIDs = new Map();
 const onlineUsers = new Set();
 
-mongoose.connect("mongodb://127.0.0.1:27017/Chattu").then(() => {
-  console.log("Connected to Database");
-}).catch((err) => {
-  console.log(err);
-});
+connectDB();
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -60,6 +57,7 @@ app.set("io", io);
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors(corsOptions));
+app.use(morgan("dev"));
 
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/chat", chatRoute);
