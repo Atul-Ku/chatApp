@@ -1,4 +1,4 @@
-# 🌐 Social Media App
+# 🌐 Chat System
 
 A full-stack social media platform built using the MERN stack, featuring real-time communication, user authentication, and community-based interactions.
 
